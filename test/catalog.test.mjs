@@ -67,6 +67,7 @@ const sessions = {
       callEvent('d6', 'web_fetch', { url: 'https://raw.githubusercontent.com/acme/demo/main/src/index.js' }, 6),
       callEvent('d7', 'web_fetch', { url: 'https://github.com/acme/demo/blob/main/build.gradle' }, 7),
       callEvent('d8', 'pwsh', { command: 'curl http://127.0.0.1:8080/api/health' }, 8),
+      callEvent('d9', 'web_fetch', { url: 'https://gh-proxy.com/https://raw.githubusercontent.com/acme/demo/main/src/util.js' }, 9),
     ],
   },
 }
@@ -113,7 +114,7 @@ const json = JSON.parse(await readFile(join(OUTPUT, 'catalog.json'), 'utf8'))
 // --- tools deduplicated by name, counted across sessions -------------------
 assert.equal(json.tools.read.count, 2)
 assert.equal(json.tools.edit.count, 1)
-assert.equal(json.tools.web_fetch.count, 5)
+assert.equal(json.tools.web_fetch.count, 6)
 assert.equal(json.tools.skill.count, 1)
 assert.equal(json.tools['mcp__filesystem__read'].count, 1)
 
@@ -152,17 +153,19 @@ assert.match(md, /\*\*English\*\* /)
 assert.match(md, /✅ /)
 assert.match(md, /⚠️ /)
 
-// --- every row carries one of the ten categories ---------------------------
-for (const category of ['环境与运行时', '构建与包分发', '命令行工具', '源码仓库', '地理与行政区划', '天气']) {
-  assert.ok(md.includes(`| ${category}<br>`), `category present: ${category}`)
+// --- four categories, two per table ---------------------------------------
+for (const [zh, en] of [['环境', 'Environment'], ['源码', 'Code'], ['信息', 'Information'], ['资料', 'References']]) {
+  assert.ok(md.includes(`| ${zh}<br>${en}`), `category present: ${zh} / ${en}`)
 }
-assert.match(md, /环境与运行时<br>Environment & runtime/)
-assert.match(md, /源码仓库<br>Repositories/)
-assert.doesNotMatch(md, /SDK 与开发工具包/, 'the old separate SDK category is merged away')
+assert.doesNotMatch(md, /环境与运行时<br>/, 'the ten-category taxonomy is gone')
+assert.doesNotMatch(md, /构建与包分发<br>/, 'build and mirrors are folded into 环境')
+assert.doesNotMatch(md, /地理与行政区划<br>/, 'geo and weather are folded into 信息')
+assert.doesNotMatch(md, /专利与文献<br>/, 'patents and papers are folded into 资料')
 
 // --- labels are cross-cutting: local service and own repository ------------
 assert.match(md, /🏷 本地 Local/, 'loopback endpoint gets the local label')
 assert.match(md, /🏷 本地 Local · 自有 Own|🏷 自有 Own/, 'own repository gets the own label')
+assert.match(md, /代理 Proxy/, 'a proxied request gets the proxy label')
 
 // --- high-value entries are kept, named and explained -----------------------
 assert.match(md, /\| api\.adoptium\.net\/v3 \|/)

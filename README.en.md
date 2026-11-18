@@ -22,26 +22,23 @@ Two hard rules: **it must have been acquired** (a link that only appeared in sea
 
 A **category answers "what is this"** and each row has exactly one; a **label answers "what property does it have"** and a row may carry several.
 
-| Category | What it holds |
-|---|---|
-| Environment & runtime | JDK, Python, Node, the Android SDK, apktool — runtimes, SDKs and platform toolchains |
-| Build & packages | Gradle, Maven, npm/pnpm, pip, plus mirrors and CDNs |
-| CLI tools | curl, git, 7z, ffmpeg, pandoc, jq |
-| Repositories | GitHub / GitLab / Gitee repositories and files |
-| Proxies | relays such as gh-proxy and r.jina.ai |
-| Geo & regions | DataV areas_v3, city-geo, geonames, geocoding |
-| Weather | Open-Meteo and similar current/forecast APIs |
-| Patents & papers | Google Patents, Espacenet, USPTO, CNIPA, arXiv |
-| Datasets | HuggingFace Datasets, Kaggle |
-| APIs & endpoints | third-party or local endpoints actually called |
+Four categories, one verb each — **install / read / query / consult**. Four is the number a person can hold without counting on fingers, and a new domain (regulation, firmware, corpus) still fits one of them, so the taxonomy does not have to grow.
+
+| Category | Test | What it holds |
+|---|---|---|
+| **环境** Environment | you **install** it, once | runtimes, SDKs, build and package sources, CLI tools, proxies |
+| **源码** Code | you **read** it and can copy it | repositories, examples, libraries, model-weight repos |
+| **信息** Information | you **query** it by parameter | boundaries, weather, geocoding, datasets, API endpoints, local services |
+| **资料** References | you **read** it, never run it | patents, papers, standards, official documentation |
 
 | Label | Meaning |
 |---|---|
 | 🏷 本地 Local | a service on this machine (`127.0.0.1`, `localhost`) |
 | 🏷 自有 Own | your own repository, as configured in `ownOwners` |
 | 🏷 需 Key | the URL carries a `key=` / `token=` credential |
+| 🏷 代理 Proxy | reached through a relay such as gh-proxy or r.jina.ai |
 
-**Each category shows at most 8 rows** (the eight with the widest session coverage); the rest stay in `catalog.json`, so no category crowds out the others.
+The tools table shows only **Environment and Code**; the data table only **Information and References**. Each category lists at most 8 rows by session coverage; the rest stay in `catalog.json`.
 
 ## The acquisition column opens the source
 
@@ -90,9 +87,9 @@ dsh-catalog/
 - **Repositories**: files of one repository collapse into one row;
 - **Row labels**: repositories show `owner/repo`, URLs show `host/first-segment`, local services show `host:port`.
 
-## Upgrading from 0.2
+## Upgrading from 0.3
 
-`0.3.0` merges 14 tags into 10 categories, adds the `访问代理` (proxies) category, and adds the Category column. An existing `catalog.json` is migrated automatically (`tool-sdk`/`tool-apk` → Environment & runtime, `tool-mirror` → Build & packages, `data-address` → Geo & regions, `tool-net` → CLI tools); no forced rescan is needed.
+`0.4.0` merges the ten categories into four: Environment (runtimes, SDKs, builds, CLI, proxies), Code (repositories), Information (geo, weather, datasets, endpoints) and References (patents and papers). Every historical tag is remapped automatically, so `catalog.json` needs no rescan; proxies drop from a category to the `代理` label.
 
 ## Development
 

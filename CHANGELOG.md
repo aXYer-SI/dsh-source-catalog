@@ -4,6 +4,17 @@ All notable changes to this project are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0] - 2026-11-18
+
+### Changed
+
+- **Ten categories become four**, two per table, each answering one verb: 环境 / Environment (you
+  install it: runtimes, SDKs, builds, CLI, proxies), 源码 / Code (you read it: repositories),
+  信息 / Information (you query it: geo, weather, datasets, endpoints), 资料 / References (you
+  consult it: patents, papers, standards).
+- Proxies drop from a category to the **代理 / Proxy label**, next to 本地 / 自有 / 需 Key.
+- Every historical tag id is remapped automatically; `catalog.json` needs no rescan.
+
 ## [0.3.0] - 2026-11-18
 
 ### Changed

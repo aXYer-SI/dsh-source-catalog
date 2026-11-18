@@ -1,6 +1,6 @@
 {
   "name": "dsh-source-catalog",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "从 DSH 历史会话里提取真正用过的工具与数据源，过滤噪音，输出两张中英双语的表：每行一个类别、含优缺点、并给出可直接打开的网址。",
   "type": "module",
   "main": "lib/index.js",
