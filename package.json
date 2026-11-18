@@ -1,0 +1,51 @@
+{
+  "name": "dsh-source-catalog",
+  "version": "0.3.0",
+  "description": "从 DSH 历史会话里提取真正用过的工具与数据源，过滤噪音，输出两张中英双语的表：每行一个类别、含优缺点、并给出可直接打开的网址。",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "catalog",
+    "sources",
+    "history",
+    "knowledge-base",
+    "markdown"
+  ],
+  "author": "aXyer <wkleuven@sina.cn>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aXYer-SI/dsh-source-catalog.git"
+  },
+  "homepage": "https://github.com/aXYer-SI/dsh-source-catalog#readme",
+  "bugs": {
+    "url": "https://github.com/aXYer-SI/dsh-source-catalog/issues"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node test/catalog.test.mjs"
+  }
+}

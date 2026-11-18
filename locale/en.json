@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Tools and sources catalogue",
+    "description": "Scans past DSH sessions and turns the tools and data sources you actually used into two bilingual tables: one category per row, pros and cons, and a URL you can open. Toggle the row in Settings → Plugins; output goes to dsh-catalog/ in the session working directory unless outputDir says otherwise. Only entries that were really acquired and are reusable across sessions are kept; local files, uploads, skills and search queries are not."
+  }
+}

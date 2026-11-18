@@ -1,0 +1,12 @@
+# Node
+node_modules/
+
+# Plugin output and test artifacts
+dsh-catalog/
+test/out*/
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
